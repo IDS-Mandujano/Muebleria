@@ -18,7 +18,7 @@ public class Puerta extends Producto{
         for(int i=0; i<2;i++){
             this.tipo = tipos[i];
             this.precio = precios[i];
-            System.out.println(getNombre()+" de "+getTipo()+"....$"+getPrecio());
+            System.out.println(i+1+".-"+getNombre()+" de "+getTipo()+"....$"+getPrecio());
         }
     }
 }
