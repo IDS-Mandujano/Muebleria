@@ -46,7 +46,7 @@ public class Principal {
     }
 
     public static void menuCompra(){
-        System.out.println("");
+        System.out.println("HOLA MUNDO");
     }
 
     public static void separadores(){
