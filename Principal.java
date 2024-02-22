@@ -46,7 +46,7 @@ public class Principal {
     }
 
     public static void menuCompra(){
-        
+        System.out.println("pene negro");
     }
 
     public static void separadores(){
