@@ -25,7 +25,7 @@ public class Compra {
                     addDoor(drumDoor,birchDoor);
                     break;
                 case 2:
-                    addDiningRoom(table,chair,combo);
+                    addDiningRoom(table, chair, combo);
                     break;
                 case 3:
                     System.out.println("Vuelva pronto\nSaliendo...");
@@ -69,25 +69,65 @@ public class Compra {
                 setCountProduct(producto);
             }
 
-            System.out.println("Desea agregar otro producto?\n1.-Si\n2.-No");
-            opcDesicion = leer.nextInt();
-
-            while (opcDesicion <= 0 || opcDesicion > 2) {
-                System.out.println("Ingrese una opcion dentro del rango");
+            if (opc != 3) {
+                System.out.println("Desea agregar otro producto?\n1.-Si\n2.-No");
                 opcDesicion = leer.nextInt();
+
+                while (opcDesicion <= 0 || opcDesicion > 3) {
+                    System.out.println("Ingrese una opcion dentro del rango");
+                    opcDesicion = leer.nextInt();
+                }
             }
 
         } while (opc != 3 && opcDesicion != 2);
-        System.out.println("Tamaño total de la lista de productos: " + countProduct.size());
+        System.out.println("Tamaño total de la lista de productos: " + getCountProduct().size());
     }
 
 
     private void addDiningRoom(int table, int chair, int combo){
         Scanner leer = new Scanner(System.in);
         Comedor comedor = new Comedor();
+        Producto producto = new Producto();
+        producto.setName(null);
+
         int opc = 0;
         int opcDesicion = 0;
 
+        do {
+            System.out.println(
+            "1.-Silla de comedor...$"+chair+
+            "\n2.-Mesa de comedor....$"+table+
+            "\n3.-Sillas y mesa de comedor....$"+combo+
+            "\n4.-Salir");
 
+            opc = leer.nextInt();
+            while (opc <= 0 || opc > 4) {
+                System.out.println("Ingrese una opcion dentro del rango");
+                opc = leer.nextInt();
+            }
+
+            if (opc==1) {
+                producto.setPrice(chair);
+                setCountProduct(producto);
+            }else if(opc==2){
+                producto.setPrice(table);
+                setCountProduct(producto);
+            }else if(opc==3){
+                producto.setPrice(combo);
+                setCountProduct(producto);
+            }
+
+            if (opc!=4) {
+                System.out.println("Desea agregar otro producto?\n1.-Si\n2.-No");
+                opcDesicion = leer.nextInt();
+
+                while (opcDesicion <= 0 || opcDesicion > 2) {
+                    System.out.println("Ingrese una opcion dentro del rango");
+                    opcDesicion = leer.nextInt();
+                }
+            }
+            
+        } while (opc != 4 && opcDesicion != 2);
+        System.out.println("Tamaño total de la lista de productos: " + getCountProduct().size());
     }
 }
