@@ -129,24 +129,38 @@ public class Compra {
     private void calculeTotal() {
         Scanner leer = new Scanner(System.in);
         int total = 0;
-        int pay =0;
         for (int i = 0; i < countProduct.size(); i++) {
             total += countProduct.get(i).getPrice();
         }
-        while(pay != total){System.out.println("Total a pagar: $" + total);
-        pay = leer.nextInt();
-         }
-        printTicket(pay);
-        
+        System.out.println("Ingrese su nombre (Para la compra):");
+        String name = leer.nextLine();
+        System.out.println("Total a pagar: $" + total);
+        int pay;
+        do {
+            System.out.println("Ingrese el monto a pagar:");
+            pay = leer.nextInt();
+    
+            if (pay <= 0) {
+                System.out.println("El monto ingresado no es válido. Por favor, ingrese un valor mayor que cero.");
+            }
+        } while (pay <= 0 ||pay < total);
+        int remaining = 0;
+        if (pay > total) {
+            remaining = pay - total;
+        }
+        printTicket(pay, remaining,name);
     }
+    
 
-    private void printTicket(int pay) {
+    private void printTicket(int pay,int remaining,String name) {
         System.out.println("Recibo de compra:");
+        System.out.println("La compra esta a nombre de " + name );
         for (int i = 0; i < countProduct.size(); i++) {
             Producto producto = countProduct.get(i);
             System.out.println(producto.getName() + " - $" + producto.getPrice());
         }
         System.out.println("Usted ha pagado: " + pay);
+        System.out.println("Su cambio es de: " + remaining);
         
     }
     
