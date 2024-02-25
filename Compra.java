@@ -1,28 +1,28 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-
 public class Compra {
-    private ArrayList countProduct = new ArrayList<Producto>();
+    private ArrayList<Producto> countProduct = new ArrayList<>();
 
     public void setCountProduct(Producto producto) {
         countProduct.add(producto);
     }
-    public ArrayList getCountProduct() {
+
+    public ArrayList<Producto> getCountProduct() {
         return countProduct;
     }
 
-    public void realiceBuy(){
+    public void realiceBuy() {
         Scanner leer = new Scanner(System.in);
         int opc;
-        int drumDoor = 1200 , birchDoor = 1500;
+        int drumDoor = 1200, birchDoor = 1500;
         int table = 4000, chair = 800, combo = 7000;
 
         do {
             System.out.println("Que desea comprar?\n1.-Puertas\n2.-Comedores\n3.-Salir");
             opc = leer.nextInt();
-            switch (opc){
+            switch (opc) {
                 case 1:
-                    addDoor(drumDoor,birchDoor);
+                    addDoor(drumDoor, birchDoor);
                     break;
                 case 2:
                     addDiningRoom(table, chair, combo);
@@ -31,103 +31,123 @@ public class Compra {
                     System.out.println("Vuelva pronto\nSaliendo...");
                     break;
             }
-        }while (opc!=3);
-
-
-    }
-    public void calculeTotal(){
-
-    }
-    public void printTicket(){
-
+        } while (opc != 3);
     }
 
     private void addDoor(int drumDoor, int birchDoor) {
         Scanner leer = new Scanner(System.in);
         Puerta puerta = new Puerta();
-        Producto producto = new Producto();
-        producto.setName("Puerta");
-
-        int opc = 0;
-        int opcDesicion = 0;
-
+        int opcDecision = 0;
+    
         do {
-            puerta.viewDetails();
-            System.out.println("3.-Salir");
-            opc = leer.nextInt();
-
-            while (opc <= 0 || opc > 3) {
-                System.out.println("Ingrese una opcion dentro del rango");
-                opc = leer.nextInt();
+            Producto producto = new Producto();
+            producto.setName("Puerta");
+    
+            System.out.println("Seleccione una opción:");
+            System.out.println("1. Puerta de tambor ($" + drumDoor + ")");
+            System.out.println("2. Puerta de abedul ($" + birchDoor + ")");
+            System.out.println("3. Salir");
+            int opc = leer.nextInt();
+    
+            switch (opc) {
+                case 1:
+                    producto.setPrice(drumDoor);
+                    setCountProduct(producto);
+                    break;
+                case 2:
+                    producto.setPrice(birchDoor);
+                    setCountProduct(producto);
+                    break;
+                case 3:
+                    break;
+                default:
+                    System.out.println("Opción no válida");
+                    continue;
             }
-
-            if (opc == 1) {
-                producto.setPrice(drumDoor);
-                setCountProduct(producto);
-            } else if (opc == 2) {
-                producto.setPrice(birchDoor);
-                setCountProduct(producto);
+    
+            System.out.println("Desea agregar otro producto?\n1.-Si\n2.-No");
+            opcDecision = leer.nextInt();
+    
+            while (opcDecision != 1 && opcDecision != 2) {
+                System.out.println("Ingrese una opcion válida (1 o 2)");
+                opcDecision = leer.nextInt();
             }
-
-            if (opc != 3) {
-                System.out.println("Desea agregar otro producto?\n1.-Si\n2.-No");
-                opcDesicion = leer.nextInt();
-
-                while (opcDesicion <= 0 || opcDesicion > 3) {
-                    System.out.println("Ingrese una opcion dentro del rango");
-                    opcDesicion = leer.nextInt();
-                }
-            }
-
-        } while (opc != 3 && opcDesicion != 2);
+        } while (opcDecision == 1);
+    
         System.out.println("Tamaño total de la lista de productos: " + getCountProduct().size());
+        calculeTotal();
     }
-
-
-    private void addDiningRoom(int table, int chair, int combo){
+    
+    private void addDiningRoom(int table, int chair, int combo) {
         Scanner leer = new Scanner(System.in);
         Comedor comedor = new Comedor();
-        Producto producto = new Producto();
-        producto.setName(null);
-
-        int opc = 0;
-        int opcDesicion = 0;
-
+        int opcDecision = 0;
+    
         do {
+            Producto producto = new Producto();
             System.out.println(
-            "1.-Silla de comedor...$"+chair+
-            "\n2.-Mesa de comedor....$"+table+
-            "\n3.-Sillas y mesa de comedor....$"+combo+
-            "\n4.-Salir");
-
-            opc = leer.nextInt();
-            while (opc <= 0 || opc > 4) {
-                System.out.println("Ingrese una opcion dentro del rango");
-                opc = leer.nextInt();
+                    "1.-Silla de comedor...$" + chair +
+                            "\n2.-Mesa de comedor....$" + table +
+                            "\n3.-Sillas y mesa de comedor....$" + combo +
+                            "\n4.-Salir");
+    
+            int opc = leer.nextInt();
+            switch (opc) {
+                case 1:
+                    producto.setName("Silla de comedor");
+                    producto.setPrice(chair);
+                    setCountProduct(producto);
+                    break;
+                case 2:
+                    producto.setName("Mesa de comedor");
+                    producto.setPrice(table);
+                    setCountProduct(producto);
+                    break;
+                case 3:
+                    producto.setName("Sillas y mesa de comedor");
+                    producto.setPrice(combo);
+                    setCountProduct(producto);
+                    break;
+                case 4:
+                    break;
+                
             }
-
-            if (opc==1) {
-                producto.setPrice(chair);
-                setCountProduct(producto);
-            }else if(opc==2){
-                producto.setPrice(table);
-                setCountProduct(producto);
-            }else if(opc==3){
-                producto.setPrice(combo);
-                setCountProduct(producto);
+    
+            System.out.println("Desea agregar otro producto?\n1.-Si\n2.-No");
+            opcDecision = leer.nextInt();
+    
+            while (opcDecision != 1 && opcDecision != 2) {
+                System.out.println("Ingrese una opcion válida (1 o 2)");
+                opcDecision = leer.nextInt();
             }
-
-            if (opc!=4) {
-                System.out.println("Desea agregar otro producto?\n1.-Si\n2.-No");
-                opcDesicion = leer.nextInt();
-
-                while (opcDesicion <= 0 || opcDesicion > 2) {
-                    System.out.println("Ingrese una opcion dentro del rango");
-                    opcDesicion = leer.nextInt();
-                }
-            }
-            
-        } while (opc != 4 && opcDesicion != 2);
+        } while (opcDecision == 1);
+    
         System.out.println("Tamaño total de la lista de productos: " + getCountProduct().size());
+        calculeTotal();
     }
+    
+    private void calculeTotal() {
+        Scanner leer = new Scanner(System.in);
+        int total = 0;
+        int pay =0;
+        for (int i = 0; i < countProduct.size(); i++) {
+            total += countProduct.get(i).getPrice();
+        }
+        while(pay != total){System.out.println("Total a pagar: $" + total);
+        pay = leer.nextInt();
+         }
+        printTicket(pay);
+        
+    }
+
+    private void printTicket(int pay) {
+        System.out.println("Recibo de compra:");
+        for (int i = 0; i < countProduct.size(); i++) {
+            Producto producto = countProduct.get(i);
+            System.out.println(producto.getName() + " - $" + producto.getPrice());
+        }
+        System.out.println("Usted ha pagado: " + pay);
+        
+    }
+    
 }

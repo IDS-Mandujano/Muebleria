@@ -1,24 +1,24 @@
 import java.util.Scanner;
 
-
 public class Main {
+
     public static void main(String[] args) {
         viewMenu();
     }
 
     public  static void viewMenu(){
         int opc;
+        Scanner leer = new Scanner(System.in);
 
         do {
-            Scanner leer = new Scanner(System.in);
             System.out.println("Bienvenido a los Pinos\nSeleccione una opcion\n1.-Ver productos\n2.-Comprar\n3.-Salir");
             opc = leer.nextInt();
-            while (opc<=0 || opc > 4){
+            if (opc<=0 || opc > 3){
                 warningMessage();
-                opc = leer.nextInt();
+            } else {
+                validateOption(opc);
             }
-            validateOption(opc);
-        }while (opc!=3);
+        } while (opc!=3);
     }
 
     public static void validateOption(int opc){
@@ -39,6 +39,7 @@ public class Main {
                 endMessage();
                 separator();
                 break;
+            
         }
     }
 
@@ -48,10 +49,11 @@ public class Main {
         do {
             System.out.println("Que productos desea ver?\n1.-Puertas\n2.-Comedor\n3.-Salir");
             opc = leer.nextInt();
-            while (opc<=0||opc>3){
+            if (opc<=0||opc>3){
                 warningMessage();
+            } else {
+                validateOptionProducts(opc);
             }
-            validateOptionProducts(opc);
         }while (opc!=3);
     }
 
@@ -80,5 +82,4 @@ public class Main {
     public static void warningMessage(){ System.out.println("Seleccione dentro del rango"); }
     public static void endMessage(){ System.out.println("Vuelva pronto\nSaliendo..."); }
     public static void separator(){ System.out.println("-------------------"); }
-
 }
